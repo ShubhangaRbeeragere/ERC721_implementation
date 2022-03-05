@@ -4,7 +4,14 @@ import "./transfer.css";
 function Transfer() {
     return (
         <div className="transfer__nft">
-            <h1>Transfer NFT</h1>
+            <h1>Transfer Your NFT</h1>
+            <div className="text">
+                <h3>Select The Receiver To Send Your NFT</h3>
+
+                <div className="account_selector">
+                    <h3>Select Account: 0</h3>
+                </div>
+            </div>
         </div>
     );
 }

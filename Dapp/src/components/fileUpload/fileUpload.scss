@@ -5,19 +5,29 @@ $light__blue: #0096c7;
     height: 100%;
     position: relative;
     .text {
+        h2 {
+            color: white;
+            margin-bottom: 5px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        p {
+            margin-top: 10px;
+            line-height: 25px;
+        }
         font-size: 18px;
-        color: black;
+        color: white;
         position: absolute;
         width: 12rem;
-        top: 20%;
-        left: 14%;
-        background-color: rgba(255, 255, 255, 0.137);
-        padding: 10px;
+        top: 22%;
+        left: 14.5%;
+        background-color: rgba(black, 0.4);
+        padding: 15px;
         border-radius: 5px;
     }
 
     .file__holder {
-        margin-top: 11rem;
+        margin-top: 15rem;
         margin-left: 10rem;
         label {
             font-size: 1rem;

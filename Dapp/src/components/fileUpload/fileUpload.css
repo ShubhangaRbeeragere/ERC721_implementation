@@ -5,18 +5,30 @@
 
 .file .text {
   font-size: 18px;
-  color: black;
+  color: white;
   position: absolute;
   width: 12rem;
-  top: 20%;
-  left: 14%;
-  background-color: rgba(255, 255, 255, 0.137);
-  padding: 10px;
+  top: 22%;
+  left: 14.5%;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 15px;
   border-radius: 5px;
 }
 
+.file .text h2 {
+  color: white;
+  margin-bottom: 5px;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.file .text p {
+  margin-top: 10px;
+  line-height: 25px;
+}
+
 .file .file__holder {
-  margin-top: 11rem;
+  margin-top: 15rem;
   margin-left: 10rem;
 }
 

@@ -13,7 +13,10 @@ function FileUpload({
 }) {
     return (
         <div className="file">
-            <div className="text">Add Image File And Create NFT</div>
+            <div className="text">
+                <h2>Add NFT To Your Account</h2>{" "}
+                <p>Add Image File And Create NFT</p>
+            </div>
             {/* file buttons here */}
             <div className="file__holder">
                 <label

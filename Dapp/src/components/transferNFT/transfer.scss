@@ -3,4 +3,19 @@ $light__blue: #0096c7;
 .transfer__nft {
     background-color: $light__blue;
     height: 100vh;
+    h1 {
+        font-weight: lighter;
+        background-color: rgba(white, 0.5);
+        width: max-content;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+    .text {
+        h3 {
+            color: white;
+            font-weight: lighter;
+            width: 14ch;
+        }
+    }
 }

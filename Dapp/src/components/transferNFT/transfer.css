@@ -2,4 +2,20 @@
   background-color: #0096c7;
   height: 100vh;
 }
+
+.transfer__nft h1 {
+  font-weight: lighter;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.transfer__nft .text h3 {
+  color: white;
+  font-weight: lighter;
+  width: 14ch;
+}
 /*# sourceMappingURL=transfer.css.map */
