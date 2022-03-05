@@ -4,6 +4,8 @@
 /node_modules
 /smart_contract/node_modules
 /Dapp/node_modules
+ipfs-http.js
+ipfs.js
 /smart_contract/.pnp
 /smart_contract.pnp.js
 
