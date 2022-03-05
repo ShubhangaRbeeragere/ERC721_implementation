@@ -5,6 +5,7 @@ import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
 import FileUpload from "./components/fileUpload/fileUpload";
 import Transfer from "./components/transferNFT/transfer";
+import SelectMenu from "./components/utils/selectMenu";
 
 function App() {
     //for storing image file entered by the user
@@ -15,6 +16,17 @@ function App() {
     const [cid, setCid] = useState("");
     //for controlling loading screen
     const [loader, setLoader] = useState(false);
+    //for selecting from account
+    const [fromAccount, setFromAccount] = useState({
+        selected: "Account 1",
+        options: ["Account 1", "Account 2", "Account 3", "Account 4"],
+        visible: false,
+        theme: {
+            color: "black",
+            bgColor: "black",
+            text: "black",
+        },
+    });
 
     //initialize web3
     let web3 = new Web3("HTTP://127.0.0.1:7546");
@@ -68,7 +80,7 @@ function App() {
     return (
         <div className="App">
             <div className="first__page">
-                <Navigation />
+                {/* <Navigation />
                 <FileUpload
                     handleImageSubmit={handleImageSubmit}
                     handleImageChange={handleImageChange}
@@ -78,6 +90,13 @@ function App() {
                     loader={loader}
                     handleRedirect={handleRedirect}
                     setCid={setCid}
+                /> */}
+                <SelectMenu
+                    theme={fromAccount.theme}
+                    selected={fromAccount.selected}
+                    options={fromAccount.options}
+                    visible={fromAccount.visible}
+                    setter={setFromAccount}
                 />
             </div>
             <div className="second__page">

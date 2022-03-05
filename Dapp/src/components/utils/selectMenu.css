@@ -1,0 +1,99 @@
+.select__menu {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.select__menu .selected__wrapper {
+  padding: 13px;
+  width: width;
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 5px;
+}
+
+.select__menu .selected__wrapper .selected {
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.select__menu .selected__wrapper img {
+  height: 25px;
+  width: 25px;
+  display: block;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.select__menu .selected__wrapper img:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.select__menu .menu__options {
+  visibility: visible;
+  margin-top: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.select__menu .menu__options .option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  width: width;
+}
+
+.select__menu .menu__options .option:hover .circle {
+  border-color: #0096c7;
+}
+
+.select__menu .menu__options .option .circle {
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border-color: white;
+  border: 3px white solid;
+  border-radius: 50%;
+  margin-right: 10px;
+  -webkit-transition: border-radius 300ms ease;
+  transition: border-radius 300ms ease;
+}
+
+.select__menu .menu__options .option .circle--click {
+  background-color: #0096c7;
+  border-color: #0096c7;
+}
+
+.select__menu .menu__options .option .value {
+  color: white;
+  white-space: nowrap;
+}
+
+.select__menu .menu--hidden {
+  visibility: hidden;
+}
+/*# sourceMappingURL=selectMenu.css.map */

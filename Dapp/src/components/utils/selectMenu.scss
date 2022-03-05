@@ -1,0 +1,72 @@
+$dark__blue: #03045e;
+$light__blue: #0096c7;
+.select__menu {
+    user-select: none;
+    width: max-content;
+    $cal__width: width;
+    .selected__wrapper {
+        padding: 13px;
+        width: $cal__width;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        .selected {
+            color: white;
+            background-color: black;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        img {
+            height: 25px;
+            width: 25px;
+            display: block;
+            padding: 4px;
+            border-radius: 5px;
+            &:hover {
+                background-color: rgba(white, 0.3);
+            }
+        }
+    }
+    .menu__options {
+        visibility: visible;
+        margin-top: 3px;
+        margin-left: auto;
+        margin-right: auto;
+        display: inline-block;
+        background-color: black;
+        border-radius: 5px;
+        .option {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px;
+            width: $cal__width;
+            &:hover .circle {
+                border-color: $light__blue;
+            }
+            .circle {
+                height: 20px;
+                width: 20px;
+                background-color: transparent;
+                border-color: white;
+                border: 3px white solid;
+                border-radius: 50%;
+                margin-right: 10px;
+                transition: border-radius 300ms ease;
+            }
+            .circle--click {
+                background-color: $light__blue;
+                border-color: $light__blue;
+            }
+            .value {
+                color: white;
+                white-space: nowrap;
+            }
+        }
+    }
+    .menu--hidden {
+        visibility: hidden;
+    }
+}
