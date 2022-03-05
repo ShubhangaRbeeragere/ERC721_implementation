@@ -1,0 +1,41 @@
+.navigation {
+  height: 5rem;
+  color: white;
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.navigation h1 {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  color: white;
+  font-weight: lighter;
+}
+
+.navigation .logo {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  height: 2rem;
+  width: 2rem;
+  background-image: url("../images/logo.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+/*# sourceMappingURL=navigation.css.map */

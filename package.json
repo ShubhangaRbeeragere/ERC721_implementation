@@ -1,0 +1,11 @@
+{
+    "dependencies": {
+        "@openzeppelin/contracts": "^4.5.0",
+        "ipfs": "^0.62.1",
+        "ipfs-core": "^0.14.1",
+        "ipfs-http-client": "^56.0.1",
+        "nodemon": "^2.0.15",
+        "web3": "^1.7.1"
+    },
+    "type": "module"
+}

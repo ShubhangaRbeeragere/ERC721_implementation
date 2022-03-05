@@ -1,0 +1,30 @@
+*,
+::before,
+::after {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:root {
+  font-size: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+body {
+  height: 100vh;
+  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(30%, #0096c7), to(#03045e));
+  background-image: linear-gradient(to bottom right, #0096c7 30%, #03045e);
+}
+
+body .App {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/*# sourceMappingURL=index.css.map */

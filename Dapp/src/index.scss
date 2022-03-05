@@ -1,0 +1,27 @@
+$dark__blue: #03045e;
+$light__blue: #0096c7;
+
+*,
+::before,
+::after {
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    font-size: 20px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(
+        to bottom right,
+        $light__blue 30%,
+        $dark__blue
+    );
+    .App {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+}

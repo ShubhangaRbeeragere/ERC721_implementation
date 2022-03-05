@@ -1,0 +1,28 @@
+$dark__blue: #03045e;
+$light__blue: #0096c7;
+
+.navigation {
+    height: 5rem;
+    color: white;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+    h1 {
+        order: 2;
+        color: white;
+        font-weight: lighter;
+    }
+    .logo {
+        order: 1;
+        height: 2rem;
+        width: 2rem;
+        background-image: url("../images/logo.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}

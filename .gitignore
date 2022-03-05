@@ -1,0 +1,25 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/smart_contract/node_modules
+/Dapp/node_modules
+/smart_contract/.pnp
+/smart_contract.pnp.js
+
+# testing
+/smart_contract/coverage
+
+# production
+/smart_contract/build
+
+# misc
+/smart_contract/.DS_Store
+/smart_contract/.env.local
+/smart_contract/.env.development.local
+/smart_contract/.env.test.local
+/smart_contract/.env.production.local
+
+/smart_contract/npm-debug.log*
+/smart_contract/yarn-debug.log*
+/smart_contract/yarn-error.log*

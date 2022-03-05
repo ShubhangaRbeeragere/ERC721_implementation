@@ -1,0 +1,132 @@
+$dark__blue: #03045e;
+$light__blue: #0096c7;
+
+.file {
+    height: 100%;
+    position: relative;
+    .text {
+        font-size: 18px;
+        color: black;
+        position: absolute;
+        width: 12rem;
+        top: 20%;
+        left: 14%;
+        background-color: rgba(255, 255, 255, 0.137);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .file__holder {
+        margin-top: 11rem;
+        margin-left: 10rem;
+        label {
+            font-size: 1rem;
+            display: block;
+            color: white;
+            background-color: $dark__blue;
+            height: 2.5rem;
+            width: 7rem;
+            text-align: center;
+            line-height: 2.5rem;
+            border-radius: 4px;
+            transition: 100ms all;
+            cursor: pointer;
+            &:hover {
+                color: $light__blue;
+            }
+        }
+        input {
+            display: none;
+        }
+        button {
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 1rem;
+            color: white;
+            background-color: black;
+            height: 2.5rem;
+            width: 7rem;
+            text-align: center;
+            line-height: 2.5rem;
+            border: none;
+            border-radius: 4px;
+            transition: 100ms all;
+            &:hover {
+                color: $light__blue;
+            }
+        }
+    }
+
+    .image__holder {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: white;
+        position: absolute;
+        right: 30%;
+        top: 25%;
+        z-index: 1;
+        transition: all 1s;
+        img {
+            background-color: $light__blue;
+            border: 5px solid black;
+            border-radius: 5px;
+            height: 15rem;
+            width: 15rem;
+            object-fit: cover;
+        }
+    }
+    .image--loader {
+        &::after {
+            position: absolute;
+            left: 0;
+            top: 0;
+            content: "";
+            background-color: rgba(0, 0, 0, 0.425);
+            height: 100%;
+            width: 100%;
+
+            z-index: 2;
+        }
+        &::before {
+            position: absolute;
+            left: 42%;
+            top: 42%;
+            content: "";
+            border: rgba(255, 255, 255, 0.342) solid 7px;
+            border-left: 7px solid white;
+
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            z-index: 3;
+            animation: rotate infinite forwards linear 500ms;
+        }
+    }
+
+    .image__hover {
+        &:hover.image__hover::after {
+            position: absolute;
+            left: 0;
+            top: 0;
+            content: "click here to see your NFT";
+            text-align: center;
+            line-height: 200px;
+            background-color: rgba(0, 0, 0, 0.425);
+            height: 100%;
+            width: 100%;
+
+            z-index: 2;
+        }
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,155 @@
+.file {
+  height: 100%;
+  position: relative;
+}
+
+.file .text {
+  font-size: 18px;
+  color: black;
+  position: absolute;
+  width: 12rem;
+  top: 20%;
+  left: 14%;
+  background-color: rgba(255, 255, 255, 0.137);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.file .file__holder {
+  margin-top: 11rem;
+  margin-left: 10rem;
+}
+
+.file .file__holder label {
+  font-size: 1rem;
+  display: block;
+  color: white;
+  background-color: #03045e;
+  height: 2.5rem;
+  width: 7rem;
+  text-align: center;
+  line-height: 2.5rem;
+  border-radius: 4px;
+  -webkit-transition: 100ms all;
+  transition: 100ms all;
+  cursor: pointer;
+}
+
+.file .file__holder label:hover {
+  color: #0096c7;
+}
+
+.file .file__holder input {
+  display: none;
+}
+
+.file .file__holder button {
+  cursor: pointer;
+  margin-top: 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1rem;
+  color: white;
+  background-color: black;
+  height: 2.5rem;
+  width: 7rem;
+  text-align: center;
+  line-height: 2.5rem;
+  border: none;
+  border-radius: 4px;
+  -webkit-transition: 100ms all;
+  transition: 100ms all;
+}
+
+.file .file__holder button:hover {
+  color: #0096c7;
+}
+
+.file .image__holder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-decoration: none;
+  color: white;
+  position: absolute;
+  right: 30%;
+  top: 25%;
+  z-index: 1;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.file .image__holder img {
+  background-color: #0096c7;
+  border: 5px solid black;
+  border-radius: 5px;
+  height: 15rem;
+  width: 15rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.file .image--loader::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.425);
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
+.file .image--loader::before {
+  position: absolute;
+  left: 42%;
+  top: 42%;
+  content: "";
+  border: rgba(255, 255, 255, 0.342) solid 7px;
+  border-left: 7px solid white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  z-index: 3;
+  -webkit-animation: rotate infinite forwards linear 500ms;
+          animation: rotate infinite forwards linear 500ms;
+}
+
+.file .image__hover:hover.image__hover::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "click here to see your NFT";
+  text-align: center;
+  line-height: 200px;
+  background-color: rgba(0, 0, 0, 0.425);
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+/*# sourceMappingURL=fileUpload.css.map */
