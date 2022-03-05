@@ -4,6 +4,8 @@ import Web3 from "web3";
 import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
 import FileUpload from "./components/fileUpload/fileUpload";
+import Transfer from "./components/transferNFT/transfer";
+
 function App() {
     //for storing image file entered by the user
     const [imageData, setImageData] = useState("");
@@ -65,17 +67,22 @@ function App() {
     };
     return (
         <div className="App">
-            <Navigation />
-            <FileUpload
-                handleImageSubmit={handleImageSubmit}
-                handleImageChange={handleImageChange}
-                imageUrl={imageUrl}
-                imageData={imageData}
-                cid={cid}
-                loader={loader}
-                handleRedirect={handleRedirect}
-                setCid={setCid}
-            />
+            <div className="first__page">
+                <Navigation />
+                <FileUpload
+                    handleImageSubmit={handleImageSubmit}
+                    handleImageChange={handleImageChange}
+                    imageUrl={imageUrl}
+                    imageData={imageData}
+                    cid={cid}
+                    loader={loader}
+                    handleRedirect={handleRedirect}
+                    setCid={setCid}
+                />
+            </div>
+            <div className="second__page">
+                <Transfer />
+            </div>{" "}
         </div>
     );
 }

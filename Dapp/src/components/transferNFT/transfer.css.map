@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,cAAc,CAAC;EACX,gBAAgB,EAFN,OAAO;EAGjB,MAAM,EAAE,KAAK;CAChB",
+    "sources": [
+        "transfer.scss"
+    ],
+    "names": [],
+    "file": "transfer.css"
+}

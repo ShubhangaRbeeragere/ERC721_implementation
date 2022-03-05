@@ -12,12 +12,18 @@
 }
 
 body {
-  height: 100vh;
-  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(30%, #0096c7), to(#03045e));
-  background-image: linear-gradient(to bottom right, #0096c7 30%, #03045e);
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
 }
 
 body .App {
+  height: 200vh;
+}
+
+body .App .first__page {
+  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(30%, #0096c7), to(#03045e));
+  background-image: linear-gradient(to bottom right, #0096c7 30%, #03045e);
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
