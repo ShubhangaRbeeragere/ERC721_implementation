@@ -13,36 +13,38 @@ function FileUpload({
 }) {
     return (
         <div className="file">
-            <div className="text">
-                <h2>Add NFT To Your Account</h2>{" "}
-                <p>Add Image File And Create NFT</p>
-            </div>
-            {/* file buttons here */}
-            <div className="file__holder">
-                <label
-                    htmlFor="files"
-                    className="add__file"
-                    onClick={() => {
-                        setCid("");
-                    }}
-                >
-                    Add File
-                </label>
-                <input
-                    type="file"
-                    id="files"
-                    name="image"
-                    onChange={(e) => {
-                        handleImageChange(e);
-                    }}
-                />
-                <button
-                    onClick={() => {
-                        handleImageSubmit();
-                    }}
-                >
-                    Create NFT
-                </button>
+            <div className="text__file__holder">
+                <div className="text">
+                    <h2>Add NFT To Your Account</h2>{" "}
+                    <p>Add Image File And Create NFT</p>
+                </div>
+                {/* file buttons here */}
+                <div className="file__holder">
+                    <label
+                        htmlFor="files"
+                        className="add__file"
+                        onClick={() => {
+                            setCid("");
+                        }}
+                    >
+                        Add File
+                    </label>
+                    <input
+                        type="file"
+                        id="files"
+                        name="image"
+                        onChange={(e) => {
+                            handleImageChange(e);
+                        }}
+                    />
+                    <button
+                        onClick={() => {
+                            handleImageSubmit();
+                        }}
+                    >
+                        Create NFT
+                    </button>
+                </div>
             </div>
             {/* image */}
 

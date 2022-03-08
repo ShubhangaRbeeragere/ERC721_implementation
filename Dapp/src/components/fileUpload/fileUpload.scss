@@ -3,87 +3,96 @@ $light__blue: #0096c7;
 
 .file {
     height: 100%;
-    position: relative;
-    .text {
-        h2 {
-            color: white;
-            margin-bottom: 5px;
-            font-weight: normal;
-            letter-spacing: 1px;
-        }
-        p {
-            margin-top: 10px;
-            line-height: 25px;
-        }
-        font-size: 18px;
-        color: white;
-        position: absolute;
-        width: 12rem;
-        top: 22%;
-        left: 14.5%;
-        background-color: rgba(black, 0.4);
-        padding: 15px;
-        border-radius: 5px;
-    }
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 
-    .file__holder {
-        margin-top: 15rem;
-        margin-left: 10rem;
-        label {
-            font-size: 1rem;
-            display: block;
-            color: white;
-            background-color: $dark__blue;
-            height: 2.5rem;
-            width: 7rem;
-            text-align: center;
-            line-height: 2.5rem;
-            border-radius: 4px;
-            transition: 100ms all;
-            cursor: pointer;
-            &:hover {
-                color: $light__blue;
+    .text__file__holder {
+        margin: auto;
+        margin-bottom: 8rem;
+        margin-left: 5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(black, 0.4);
+        padding: 20px;
+        border-radius: 5px;
+        .text {
+            margin-bottom: 10px;
+            h2 {
+                color: white;
+                margin-bottom: 5px;
+                font-weight: normal;
+                letter-spacing: 1px;
             }
-        }
-        input {
-            display: none;
-        }
-        button {
-            cursor: pointer;
-            margin-top: 10px;
-            font-family: Georgia, "Times New Roman", Times, serif;
-            font-size: 1rem;
+            p {
+                margin-top: 10px;
+                line-height: 25px;
+            }
+            font-size: 18px;
             color: white;
-            background-color: black;
-            height: 2.5rem;
-            width: 7rem;
-            text-align: center;
-            line-height: 2.5rem;
-            border: none;
-            border-radius: 4px;
-            transition: 100ms all;
-            &:hover {
-                color: $light__blue;
+            width: 12rem;
+            padding: 15px;
+        }
+
+        .file__holder {
+            width: max-content;
+            label {
+                font-size: 1rem;
+                display: block;
+                color: white;
+                background-color: $dark__blue;
+                height: 2.5rem;
+                width: 7rem;
+                text-align: center;
+                line-height: 2.5rem;
+                border-radius: 4px;
+                transition: 100ms all;
+                cursor: pointer;
+                &:hover {
+                    color: $light__blue;
+                }
+            }
+            input {
+                display: none;
+            }
+            button {
+                margin-top: 5px;
+                cursor: pointer;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 1rem;
+                color: white;
+                background-color: black;
+                height: 2.5rem;
+                width: 7rem;
+                text-align: center;
+                line-height: 2.5rem;
+                border: none;
+                border-radius: 4px;
+                transition: 100ms all;
+                &:hover {
+                    color: $light__blue;
+                }
             }
         }
     }
 
     .image__holder {
+        margin: auto;
+        margin-bottom: 8rem;
+        margin-left: 1rem;
         display: flex;
         flex-direction: column;
         text-decoration: none;
         color: white;
-        position: absolute;
-        right: 30%;
-        top: 25%;
-        z-index: 1;
+        position: relative;
         transition: all 1s;
         img {
             background-color: $light__blue;
             border: 5px solid black;
             border-radius: 5px;
-            height: 15rem;
-            width: 15rem;
+            height: 12rem;
+            width: 12rem;
             object-fit: cover;
         }
     }
@@ -121,6 +130,7 @@ $light__blue: #0096c7;
             left: 0;
             top: 0;
             content: "click here to see your NFT";
+            font-size: large;
             text-align: center;
             line-height: 200px;
             background-color: rgba(0, 0, 0, 0.425);

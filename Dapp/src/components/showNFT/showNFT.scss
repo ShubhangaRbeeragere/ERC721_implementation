@@ -1,0 +1,59 @@
+$dark__blue: #03045e;
+$light__blue: #0096c7;
+
+.nft {
+    height: 100%;
+    width: 100%;
+    h4 {
+        color: white;
+        text-align: center;
+        margin-top: 5rem;
+    }
+    .image__gallery {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        height: 20rem;
+        width: 20rem;
+        background-color: $light__blue;
+        border-radius: 5px;
+        overflow: auto;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        align-content: flex-start;
+        column-gap: 0;
+
+        .span {
+            display: inline-block;
+            height: 5rem;
+            width: 5rem;
+            position: relative;
+            margin-top: 20px;
+            justify-self: center;
+            z-index: 1;
+            img {
+                height: 5rem;
+                width: 5rem;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+
+            &:hover.span::after {
+                position: absolute;
+                left: 0;
+                top: 0;
+                content: "Open";
+                text-align: center;
+                line-height: 5rem;
+                background-color: rgba(0, 0, 0, 0.425);
+                border-radius: 5px;
+                color: white;
+                height: 100%;
+                width: 100%;
+                z-index: 2;
+            }
+        }
+    }
+}

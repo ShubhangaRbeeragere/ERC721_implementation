@@ -5,6 +5,7 @@ import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
 import FileUpload from "./components/fileUpload/fileUpload";
 import Transfer from "./components/transferNFT/transfer";
+import ShowNFT from "./components/showNFT/showNFT";
 
 function App() {
     //for storing image file entered by the user
@@ -25,11 +26,13 @@ function App() {
         options: [],
         selected: "",
     });
+    //for image gallery
+    let [imageGallery, setImageGallery] = useState([]);
     //initialize web3
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0x0D1bE5c29C2879593e86aD7a6183BCBC2A5B304C"
+        "0xDf90Fa307eBaE87f6A32FF8346A7E12558aA74BD"
     );
     ///////////////////////////////////////////////////////////////////////
     //get the name
@@ -89,6 +92,7 @@ function App() {
                 tokenURIarray.push(tokenURI);
             }
             console.log("token URI of ", address, " is ", tokenURIarray);
+            setImageGallery(tokenURIarray);
         } catch (err) {
             console.log("--error--getAllNFT--", err);
         }
@@ -130,6 +134,7 @@ function App() {
                 options: accounts,
                 selected: accounts[0],
             });
+            return accounts[0].value;
         } catch (err) {
             console.log("--error--getAccounts--", err);
             // setMessage({
@@ -145,6 +150,12 @@ function App() {
         getName();
         getSymbol();
     }, []);
+
+    useEffect(() => {
+        if (fromOptions.selected.value) {
+            getAllNFT(fromOptions.selected.value);
+        }
+    }, [fromOptions]);
     //util functions//////////////////////////////////////////////////////////////
     //to convert array into onbject
     const toObject = async (arr) => {
@@ -202,16 +213,19 @@ function App() {
                     fromOptions={fromOptions}
                     setFromOptions={setFromOptions}
                 />
-                <FileUpload
-                    handleImageSubmit={handleImageSubmit}
-                    handleImageChange={handleImageChange}
-                    imageUrl={imageUrl}
-                    imageData={imageData}
-                    cid={cid}
-                    loader={loader}
-                    handleRedirect={handleRedirect}
-                    setCid={setCid}
-                />
+                <div className="file__nft__holder">
+                    <FileUpload
+                        handleImageSubmit={handleImageSubmit}
+                        handleImageChange={handleImageChange}
+                        imageUrl={imageUrl}
+                        imageData={imageData}
+                        cid={cid}
+                        loader={loader}
+                        handleRedirect={handleRedirect}
+                        setCid={setCid}
+                    />
+                    <ShowNFT imageGallery={imageGallery} />
+                </div>
             </div>
             <div className="second__page">
                 <Transfer />

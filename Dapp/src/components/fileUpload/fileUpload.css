@@ -1,38 +1,61 @@
 .file {
   height: 100%;
-  position: relative;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
-.file .text {
-  font-size: 18px;
-  color: white;
-  position: absolute;
-  width: 12rem;
-  top: 22%;
-  left: 14.5%;
+.file .text__file__holder {
+  margin: auto;
+  margin-bottom: 8rem;
+  margin-left: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
-  padding: 15px;
+  padding: 20px;
   border-radius: 5px;
 }
 
-.file .text h2 {
+.file .text__file__holder .text {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: white;
+  width: 12rem;
+  padding: 15px;
+}
+
+.file .text__file__holder .text h2 {
   color: white;
   margin-bottom: 5px;
   font-weight: normal;
   letter-spacing: 1px;
 }
 
-.file .text p {
+.file .text__file__holder .text p {
   margin-top: 10px;
   line-height: 25px;
 }
 
-.file .file__holder {
-  margin-top: 15rem;
-  margin-left: 10rem;
+.file .text__file__holder .file__holder {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
-.file .file__holder label {
+.file .text__file__holder .file__holder label {
   font-size: 1rem;
   display: block;
   color: white;
@@ -47,17 +70,17 @@
   cursor: pointer;
 }
 
-.file .file__holder label:hover {
+.file .text__file__holder .file__holder label:hover {
   color: #0096c7;
 }
 
-.file .file__holder input {
+.file .text__file__holder .file__holder input {
   display: none;
 }
 
-.file .file__holder button {
+.file .text__file__holder .file__holder button {
+  margin-top: 5px;
   cursor: pointer;
-  margin-top: 10px;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 1rem;
   color: white;
@@ -72,11 +95,14 @@
   transition: 100ms all;
 }
 
-.file .file__holder button:hover {
+.file .text__file__holder .file__holder button:hover {
   color: #0096c7;
 }
 
 .file .image__holder {
+  margin: auto;
+  margin-bottom: 8rem;
+  margin-left: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -86,10 +112,7 @@
           flex-direction: column;
   text-decoration: none;
   color: white;
-  position: absolute;
-  right: 30%;
-  top: 25%;
-  z-index: 1;
+  position: relative;
   -webkit-transition: all 1s;
   transition: all 1s;
 }
@@ -98,8 +121,8 @@
   background-color: #0096c7;
   border: 5px solid black;
   border-radius: 5px;
-  height: 15rem;
-  width: 15rem;
+  height: 12rem;
+  width: 12rem;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -135,6 +158,7 @@
   left: 0;
   top: 0;
   content: "click here to see your NFT";
+  font-size: large;
   text-align: center;
   line-height: 200px;
   background-color: rgba(0, 0, 0, 0.425);

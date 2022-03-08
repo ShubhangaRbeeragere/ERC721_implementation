@@ -25,6 +25,12 @@ body {
             height: 100vh;
             display: flex;
             flex-direction: column;
+            .file__nft__holder {
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                align-items: center;
+            }
         }
     }
 }
