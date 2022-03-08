@@ -4,12 +4,13 @@ $light__blue: #0096c7;
 .nft {
     height: 100%;
     width: 100%;
-    h4 {
+    &__heading {
         color: white;
         text-align: center;
         margin-top: 5rem;
     }
     .image__gallery {
+        position: relative;
         margin-left: auto;
         margin-right: auto;
         margin-top: 5px;
@@ -18,13 +19,26 @@ $light__blue: #0096c7;
         background-color: $light__blue;
         border-radius: 5px;
         overflow: auto;
-
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
         align-content: flex-start;
         column-gap: 0;
+        outline: 1px solid black;
 
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        h3 {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            line-height: 20rem;
+        }
         .span {
             display: inline-block;
             height: 5rem;
@@ -38,6 +52,7 @@ $light__blue: #0096c7;
                 width: 5rem;
                 object-fit: cover;
                 border-radius: 5px;
+                box-shadow: 0 5px 5px 1px rgba(black, 0.5);
             }
 
             &:hover.span::after {
@@ -54,6 +69,34 @@ $light__blue: #0096c7;
                 width: 100%;
                 z-index: 2;
             }
+        }
+    }
+
+    .image__gallery__loading {
+        &::after {
+            position: absolute;
+            left: 0;
+            top: 0;
+            content: "";
+            background-color: rgba(0, 0, 0, 0.425);
+            height: 100%;
+            width: 100%;
+
+            z-index: 2;
+        }
+        &::before {
+            position: absolute;
+            left: 42%;
+            top: 42%;
+            content: "";
+            border: rgba(255, 255, 255, 0.342) solid 7px;
+            border-left: 7px solid white;
+
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            z-index: 3;
+            animation: rotate infinite forwards linear 500ms;
         }
     }
 }

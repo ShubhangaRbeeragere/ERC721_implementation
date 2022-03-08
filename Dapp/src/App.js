@@ -4,7 +4,8 @@ import Web3 from "web3";
 import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
 import FileUpload from "./components/fileUpload/fileUpload";
-import Transfer from "./components/transferNFT/transfer";
+import defaultImage from "./defaultImage.png";
+// import Transfer from "./components/transferNFT/transfer";
 import ShowNFT from "./components/showNFT/showNFT";
 
 function App() {
@@ -28,11 +29,13 @@ function App() {
     });
     //for image gallery
     let [imageGallery, setImageGallery] = useState([]);
+    //for image gallery loading screen
+    const [imageLoader, setImageLoader] = useState(false);
     //initialize web3
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0xDf90Fa307eBaE87f6A32FF8346A7E12558aA74BD"
+        "0xF01f6d9e6e3982D3bd0BBdFb61E8d47Be06c2E68"
     );
     ///////////////////////////////////////////////////////////////////////
     //get the name
@@ -81,9 +84,10 @@ function App() {
     //get all the NFTs of the address
     let getAllNFT = async (address) => {
         try {
+            //set screen loader while getting the images
+            setImageLoader(true);
             let balance = await balanceOf(address);
             let tokenURIarray = [];
-            console.log("here");
             for (let index = 0; index < balance; index++) {
                 let tokenId = await contract.methods
                     .tokenOfOwnerByIndex(address, index)
@@ -91,8 +95,10 @@ function App() {
                 let tokenURI = await contract.methods.tokenURI(tokenId).call();
                 tokenURIarray.push(tokenURI);
             }
-            console.log("token URI of ", address, " is ", tokenURIarray);
+            // console.log("token URI of ", address, " is ", tokenURIarray);
             setImageGallery(tokenURIarray);
+            //remove screen loader
+            setImageLoader(false);
         } catch (err) {
             console.log("--error--getAllNFT--", err);
         }
@@ -102,7 +108,7 @@ function App() {
     let balanceOf = async (address) => {
         try {
             let balance = await contract.methods.balanceOf(address).call();
-            console.log("NFT balance ", balance);
+            // console.log("NFT balance ", balance);
             return parseInt(balance);
         } catch (err) {
             console.error("--error--balanceOf--", err);
@@ -146,9 +152,11 @@ function App() {
 
     //useEffect/////////////////////////////////////////////////////////////////
     useEffect(() => {
+        //set default image
+        setImageUrl(defaultImage);
         getAccounts();
-        getName();
-        getSymbol();
+        // getName();
+        // getSymbol();
     }, []);
 
     useEffect(() => {
@@ -224,12 +232,15 @@ function App() {
                         handleRedirect={handleRedirect}
                         setCid={setCid}
                     />
-                    <ShowNFT imageGallery={imageGallery} />
+                    <ShowNFT
+                        imageGallery={imageGallery}
+                        imageLoader={imageLoader}
+                    />
                 </div>
             </div>
-            <div className="second__page">
+            {/* <div className="second__page">
                 <Transfer />
-            </div>{" "}
+            </div>{" "} */}
         </div>
     );
 }

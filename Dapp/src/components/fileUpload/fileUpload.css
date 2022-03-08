@@ -119,7 +119,7 @@
 
 .file .image__holder img {
   background-color: #0096c7;
-  border: 5px solid black;
+  outline: 5px solid black;
   border-radius: 5px;
   height: 12rem;
   width: 12rem;

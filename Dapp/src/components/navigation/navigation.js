@@ -38,7 +38,6 @@ function Navigation({ fromOptions, setFromOptions }) {
                         styles={customStyles}
                         defaultValue={options[0]}
                         onChange={(selected) => {
-                            console.log(selected.value);
                             setFromOptions({
                                 ...fromOptions,
                                 selected: selected,

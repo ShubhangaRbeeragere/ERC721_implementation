@@ -15,7 +15,8 @@ $light__blue: #0096c7;
 body {
     height: max-content;
     .App {
-        height: 200vh;
+        //set this to 200vh if second page is needed
+        height: 100vh;
         .first__page {
             background-image: linear-gradient(
                 to bottom right,
