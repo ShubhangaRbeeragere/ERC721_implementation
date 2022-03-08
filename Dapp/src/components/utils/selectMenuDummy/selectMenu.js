@@ -1,8 +1,12 @@
 import React from "react";
 import "./selectMenu.css";
-import arrowSvg from "../images/arrow.svg";
+import arrowSvg from "./arrow.svg";
 
-function SelectMenu({ options, selected, setter, visible, theme }) {
+function SelectMenu({ menuData, setter }) {
+    let options = menuData.options;
+    let selected = menuData.selected;
+    let visible = menuData.visible;
+    let theme = menuData.theme;
     return (
         <div className="select__menu">
             <div
@@ -31,12 +35,13 @@ function SelectMenu({ options, selected, setter, visible, theme }) {
                 selected={selected}
                 setter={setter}
                 visible={visible}
+                theme={theme}
             />
         </div>
     );
 }
 
-function Options({ options, selected, setter, visible }) {
+function Options({ options, selected, setter, visible, theme }) {
     return (
         <div
             className={visible ? "menu__options" : "menu__options menu--hidden"}

@@ -1,5 +1,6 @@
 .navigation {
   height: 5rem;
+  width: 100%;
   color: white;
   background-color: black;
   display: -webkit-box;
@@ -9,12 +10,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   gap: 10px;
   padding-left: 10px;
 }
@@ -37,5 +38,24 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.select_menu {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: fixed;
+  top: 4%;
+  right: 1%;
+  z-index: 5;
+}
+
+.select_menu .css-b62m3t-container {
+  width: 7.5rem;
+  top: 0;
+  right: 0;
 }
 /*# sourceMappingURL=navigation.css.map */

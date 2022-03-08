@@ -1,6 +1,7 @@
 $dark__blue: #03045e;
 $light__blue: #0096c7;
 .select__menu {
+    position: relative;
     user-select: none;
     width: max-content;
     $cal__width: width;
@@ -34,9 +35,14 @@ $light__blue: #0096c7;
         margin-top: 3px;
         margin-left: auto;
         margin-right: auto;
+        position: absolute;
+        transform: translateX(-10%);
+        z-index: 5;
+        min-width: 9rem;
         display: inline-block;
         background-color: black;
         border-radius: 5px;
+        overflow: hidden;
         .option {
             display: flex;
             justify-content: flex-start;
@@ -68,5 +74,6 @@ $light__blue: #0096c7;
     }
     .menu--hidden {
         visibility: hidden;
+        height: 0;
     }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import "./transfer.css";
 
 function Transfer() {
@@ -8,9 +9,7 @@ function Transfer() {
             <div className="text">
                 <h3>Select The Receiver To Send Your NFT</h3>
 
-                <div className="account_selector">
-                    <h3>Select Account: 0</h3>
-                </div>
+                <div className="account_selector"></div>
             </div>
         </div>
     );

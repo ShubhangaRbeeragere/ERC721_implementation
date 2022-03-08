@@ -1,11 +1,10 @@
 import { create } from "ipfs-core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Web3 from "web3";
 import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
 import FileUpload from "./components/fileUpload/fileUpload";
 import Transfer from "./components/transferNFT/transfer";
-import SelectMenu from "./components/utils/selectMenu";
 
 function App() {
     //for storing image file entered by the user
@@ -16,29 +15,148 @@ function App() {
     const [cid, setCid] = useState("");
     //for controlling loading screen
     const [loader, setLoader] = useState(false);
-    //for selecting from account
-    const [fromAccount, setFromAccount] = useState({
-        selected: "Account 1",
-        options: ["Account 1", "Account 2", "Account 3", "Account 4"],
-        visible: false,
-        theme: {
-            color: "black",
-            bgColor: "black",
-            text: "black",
-        },
+    //for select menu for 'FROM' account
+    let [fromOptions, setFromOptions] = useState({
+        options: [],
+        selected: "",
     });
-
+    //for select menu for 'TO' account
+    let [toOptions, setToOptions] = useState({
+        options: [],
+        selected: "",
+    });
     //initialize web3
-    let web3 = new Web3("HTTP://127.0.0.1:7546");
+    let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0x20e96ee0C6D644580CFfb8BeD6C7dc48265c5d86"
+        "0x0D1bE5c29C2879593e86aD7a6183BCBC2A5B304C"
     );
+    ///////////////////////////////////////////////////////////////////////
+    //get the name
+    let getName = async () => {
+        try {
+            let name = await contract.methods.name().call();
+            console.log("token name", name);
+        } catch (error) {
+            console.log("--error--getName--", error);
+        }
+    };
+    //get symbol
+    let getSymbol = async () => {
+        try {
+            let symbol = await contract.methods.symbol().call();
+            console.log("symbol", symbol);
+        } catch (error) {
+            console.log("--error--getSymbol--", error);
+        }
+    };
+    //mint NFT for the selected address
+    let mintNFT = (address, tokenURI) => {
+        console.log("address ", address, " token ", tokenURI);
+        contract.methods
+            .mintNFT(address, tokenURI)
+            .send({
+                from: address,
+                gas: 80000000000,
+            })
+            .on("receipt", (data) => {
+                console.log("--nft mint successfull--");
+                // balanceOf(address);
+                getAllNFT(address);
+                // balanceOf(address);
+                // setMessage({
+                //     data: "transfer successful",
+                //     visibility: true,
+                // });
+            })
+            .on("error", (err, receipt) => {
+                if (err) {
+                    console.error("--error--mintNFT--", err);
+                }
+            });
+    };
+    //get all the NFTs of the address
+    let getAllNFT = async (address) => {
+        try {
+            let balance = await balanceOf(address);
+            let tokenURIarray = [];
+            console.log("here");
+            for (let index = 0; index < balance; index++) {
+                let tokenId = await contract.methods
+                    .tokenOfOwnerByIndex(address, index)
+                    .call();
+                let tokenURI = await contract.methods.tokenURI(tokenId).call();
+                tokenURIarray.push(tokenURI);
+            }
+            console.log("token URI of ", address, " is ", tokenURIarray);
+        } catch (err) {
+            console.log("--error--getAllNFT--", err);
+        }
+    };
 
-    //mint NFT for the user
+    //get the total NFT owned by the address
+    let balanceOf = async (address) => {
+        try {
+            let balance = await contract.methods.balanceOf(address).call();
+            console.log("NFT balance ", balance);
+            return parseInt(balance);
+        } catch (err) {
+            console.error("--error--balanceOf--", err);
+        }
+    };
+
+    let totalBalance = async (address) => {
+        try {
+            let balance = await contract.methods.totalSupply().call();
+            console.log(balance);
+        } catch (error) {
+            console.log("--error--totalBalance--", error);
+        }
+    };
+    //get all the accounts in the smart-contract
+    let getAccounts = async () => {
+        let accountData = [];
+        try {
+            accountData = await web3.eth.getAccounts();
+            // console.log(accountData);
+            let accounts = await toObject(accountData);
+            setFromOptions({
+                ...fromOptions,
+                options: accounts,
+                selected: accounts[0],
+            });
+            setToOptions({
+                ...toOptions,
+                options: accounts,
+                selected: accounts[0],
+            });
+        } catch (err) {
+            console.log("--error--getAccounts--", err);
+            // setMessage({
+            //     data: "error while getting accounts, getAccount",
+            //     visibility: true,
+            // });
+        }
+    };
+
+    //useEffect/////////////////////////////////////////////////////////////////
+    useEffect(() => {
+        getAccounts();
+        getName();
+        getSymbol();
+    }, []);
+    //util functions//////////////////////////////////////////////////////////////
+    //to convert array into onbject
+    const toObject = async (arr) => {
+        let obj = [];
+        for (let i = 0; i < arr.length; i++) {
+            obj.push({ value: arr[i], label: `Account ${i + 1}` });
+        }
+        return obj;
+    };
 
     //acual code starts from here
-    let connection = async () => {
+    let handleImageSubmit = async () => {
         try {
             setLoader(true);
             const ipfs = await create({ repo: "ok" + Math.random() });
@@ -51,13 +169,13 @@ function App() {
             //////
             setCid(cid.toString());
             setLoader(false);
+
+            //mint NFT
+            console.log("minting......");
+            mintNFT(fromOptions.selected.value, `https://ipfs.io/ipfs/${cid}`);
         } catch (err) {
             console.error("error-----", err);
         }
-    };
-
-    let handleImageSubmit = () => {
-        connection();
     };
     let handleImageChange = (e) => {
         //get the file uploaded by the user
@@ -80,7 +198,10 @@ function App() {
     return (
         <div className="App">
             <div className="first__page">
-                {/* <Navigation />
+                <Navigation
+                    fromOptions={fromOptions}
+                    setFromOptions={setFromOptions}
+                />
                 <FileUpload
                     handleImageSubmit={handleImageSubmit}
                     handleImageChange={handleImageChange}
@@ -90,13 +211,6 @@ function App() {
                     loader={loader}
                     handleRedirect={handleRedirect}
                     setCid={setCid}
-                /> */}
-                <SelectMenu
-                    theme={fromAccount.theme}
-                    selected={fromAccount.selected}
-                    options={fromAccount.options}
-                    visible={fromAccount.visible}
-                    setter={setFromAccount}
                 />
             </div>
             <div className="second__page">
@@ -105,6 +219,4 @@ function App() {
         </div>
     );
 }
-//contract address: 0x20e96ee0C6D644580CFfb8BeD6C7dc48265c5d86
-//network ID: 5777
 export default App;
