@@ -36,7 +36,7 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0xdcA2aeCbb1EE2750219118ae7C760291000F3E3E"
+        "0xaD22A16d6b09b3428760B7De6CBe7a0a836de40B"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -243,6 +243,14 @@ function App() {
     return (
         <div className="App">
             <div className="first__page">
+                <div
+                    className="dummy"
+                    onClick={() => {
+                        initializeMetamask();
+                    }}
+                >
+                    click me
+                </div>
                 <Navigation
                     fromOptions={fromOptions}
                     setFromOptions={setFromOptions}
