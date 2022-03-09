@@ -1,5 +1,6 @@
 import { create } from "ipfs-core";
 import { useEffect, useState } from "react";
+import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
@@ -35,9 +36,30 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0xF01f6d9e6e3982D3bd0BBdFb61E8d47Be06c2E68"
+        "0xdcA2aeCbb1EE2750219118ae7C760291000F3E3E"
     );
     ///////////////////////////////////////////////////////////////////////
+    //checking if metamask installed
+    let initializeMetamask = async () => {
+        try {
+            if (typeof window.ethereum !== "undefined") {
+                console.log("MetaMask is installed!");
+                let accounts = await window.ethereum.request({
+                    method: "eth_requestAccounts",
+                });
+                return accounts;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    //when the user selects a different account in metamask
+    window.ethereum.on("accountsChanged", (account) => {
+        console.log("switched to account ", account[0]);
+        // setFromOptions({ ...fromOptions, selected: account[0] });
+    });
+
     //get the name
     let getName = async () => {
         try {
@@ -63,7 +85,7 @@ function App() {
             .mintNFT(address, tokenURI)
             .send({
                 from: address,
-                gas: 80000000000,
+                gas: 80000000,
             })
             .on("receipt", (data) => {
                 console.log("--nft mint successfull--");
@@ -152,6 +174,10 @@ function App() {
 
     //useEffect/////////////////////////////////////////////////////////////////
     useEffect(() => {
+        initializeMetamask().then((acc) => {
+            console.log("accounts ", acc);
+            // setFromOptions({ ...fromOptions, selected: acc[0] });
+        });
         //set default image
         setImageUrl(defaultImage);
         getAccounts();

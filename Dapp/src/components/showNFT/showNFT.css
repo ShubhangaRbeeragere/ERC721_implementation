@@ -7,6 +7,20 @@
   color: white;
   text-align: center;
   margin-top: 5rem;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.nft__heading::before {
+  background-color: rgba(255, 255, 255, 0.6);
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 150px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  bottom: -1px;
 }
 
 .nft .image__gallery {
@@ -16,7 +30,7 @@
   margin-top: 5px;
   height: 20rem;
   width: 20rem;
-  background-color: #0096c7;
+  background-color: rgba(0, 150, 199, 0.6);
   border-radius: 5px;
   overflow: auto;
   display: -ms-grid;
@@ -29,7 +43,6 @@
       align-content: flex-start;
   -webkit-column-gap: 0;
           column-gap: 0;
-  outline: 1px solid black;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
