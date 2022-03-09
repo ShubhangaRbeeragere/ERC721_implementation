@@ -1,0 +1,45 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "restoreTerminals.terminals": [
+        {
+            "splitTerminals": [
+                {
+                    "name": "Ganache",
+                    "commands": [
+                        "cd smart_contract",
+                        "ganache-cli -p 7545 -l 20000000000000  -g 20000000000000 -e 2000000"
+                    ]
+                },
+                {
+                    "name": "Truffle",
+                    "commands": ["cd smart_contract", "truffle migrate"]
+                }
+            ]
+        },
+        {
+            "splitTerminals": [
+                {
+                    "name": "Git",
+                    "commands": ["git status"],
+                    "shouldRunCommands": false
+                },
+                {
+                    "name": "NPM",
+                    "shouldRunCommands": false
+                }
+            ]
+        },
+
+        {
+            "splitTerminals": [
+                {
+                    "name": "React",
+                    "commands": ["cd Dapp", "npm run start"]
+                }
+            ]
+        }
+    ]
+}

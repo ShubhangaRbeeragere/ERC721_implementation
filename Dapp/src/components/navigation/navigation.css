@@ -40,22 +40,23 @@
   background-size: contain;
 }
 
-.select_menu {
+.navigation .selected__account {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  position: fixed;
-  top: 4%;
-  right: 1%;
-  z-index: 5;
+  margin-left: auto;
+  margin-right: 5px;
+  padding: 5px;
 }
 
-.select_menu .css-b62m3t-container {
-  width: 7.5rem;
-  top: 0;
-  right: 0;
+.navigation .selected__account h5 {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman";
+  color: #0096c7;
 }
 /*# sourceMappingURL=navigation.css.map */

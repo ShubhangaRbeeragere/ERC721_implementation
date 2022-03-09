@@ -1,6 +1,5 @@
 import { create } from "ipfs-core";
 import { useEffect, useState } from "react";
-import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
@@ -19,15 +18,7 @@ function App() {
     //for controlling loading screen
     const [loader, setLoader] = useState(false);
     //for select menu for 'FROM' account
-    let [fromOptions, setFromOptions] = useState({
-        options: [],
-        selected: "",
-    });
-    //for select menu for 'TO' account
-    let [toOptions, setToOptions] = useState({
-        options: [],
-        selected: "",
-    });
+    let [fromAccount, setFromOptions] = useState("");
     //for image gallery
     let [imageGallery, setImageGallery] = useState([]);
     //for image gallery loading screen
@@ -36,7 +27,7 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0xaD22A16d6b09b3428760B7De6CBe7a0a836de40B"
+        "0x526f6a6c404eEF8BEeBdA39dD1e2D87335538518"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -53,12 +44,6 @@ function App() {
             console.log(err);
         }
     };
-
-    //when the user selects a different account in metamask
-    window.ethereum.on("accountsChanged", (account) => {
-        console.log("switched to account ", account[0]);
-        // setFromOptions({ ...fromOptions, selected: account[0] });
-    });
 
     //get the name
     let getName = async () => {
@@ -109,6 +94,7 @@ function App() {
             //set screen loader while getting the images
             setImageLoader(true);
             let balance = await balanceOf(address);
+            console.log("getting nfts");
             let tokenURIarray = [];
             for (let index = 0; index < balance; index++) {
                 let tokenId = await contract.methods
@@ -147,22 +133,10 @@ function App() {
     };
     //get all the accounts in the smart-contract
     let getAccounts = async () => {
-        let accountData = [];
+        let accounts = [];
         try {
-            accountData = await web3.eth.getAccounts();
-            // console.log(accountData);
-            let accounts = await toObject(accountData);
-            setFromOptions({
-                ...fromOptions,
-                options: accounts,
-                selected: accounts[0],
-            });
-            setToOptions({
-                ...toOptions,
-                options: accounts,
-                selected: accounts[0],
-            });
-            return accounts[0].value;
+            accounts = await web3.eth.getAccounts();
+            setFromOptions(accounts[0]);
         } catch (err) {
             console.log("--error--getAccounts--", err);
             // setMessage({
@@ -176,20 +150,32 @@ function App() {
     useEffect(() => {
         initializeMetamask().then((acc) => {
             console.log("accounts ", acc);
-            // setFromOptions({ ...fromOptions, selected: acc[0] });
+            setFromOptions(acc[0]);
         });
         //set default image
         setImageUrl(defaultImage);
-        getAccounts();
-        // getName();
-        // getSymbol();
+
+        //when the user selects a different account in metamask
+        window.ethereum.on("accountsChanged", (account) => {
+            console.log("switched to account ", account[0]);
+            setFromOptions(account[0]);
+            if (account[0]) {
+                getAllNFT(account[0]);
+            }
+        });
+
+        return function cleanUp() {
+            //remove the event listener
+            window.ehtereum.remove("accountsChanged");
+        };
     }, []);
 
     useEffect(() => {
-        if (fromOptions.selected.value) {
-            getAllNFT(fromOptions.selected.value);
+        if (fromAccount) {
+            getAllNFT(fromAccount);
         }
-    }, [fromOptions]);
+    }, [fromAccount]);
+
     //util functions//////////////////////////////////////////////////////////////
     //to convert array into onbject
     const toObject = async (arr) => {
@@ -217,7 +203,7 @@ function App() {
 
             //mint NFT
             console.log("minting......");
-            mintNFT(fromOptions.selected.value, `https://ipfs.io/ipfs/${cid}`);
+            mintNFT(fromAccount, `https://ipfs.io/ipfs/${cid}`);
         } catch (err) {
             console.error("error-----", err);
         }
@@ -243,18 +229,7 @@ function App() {
     return (
         <div className="App">
             <div className="first__page">
-                <div
-                    className="dummy"
-                    onClick={() => {
-                        initializeMetamask();
-                    }}
-                >
-                    click me
-                </div>
-                <Navigation
-                    fromOptions={fromOptions}
-                    setFromOptions={setFromOptions}
-                />
+                <Navigation fromAccount={fromAccount} />
                 <div className="file__nft__holder">
                     <FileUpload
                         handleImageSubmit={handleImageSubmit}

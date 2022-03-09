@@ -26,18 +26,17 @@ $light__blue: #0096c7;
         background-repeat: no-repeat;
         background-size: contain;
     }
-}
+    .selected__account {
+        order: 3;
+        height: max-content;
+        width: max-content;
+        margin-left: auto;
+        margin-right: 5px;
 
-.select_menu {
-    height: max-content;
-    width: max-content;
-    position: fixed;
-    top: 4%;
-    right: 1%;
-    z-index: 5;
-    .css-b62m3t-container {
-        width: 7.5rem;
-        top: 0;
-        right: 0;
+        padding: 5px;
+        h5 {
+            font-family: Cambria, Cochin, Georgia, Times, "Times New Roman";
+            color: $light__blue;
+        }
     }
 }
