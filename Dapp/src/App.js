@@ -34,7 +34,7 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab"
+        "0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -52,6 +52,14 @@ function App() {
         } catch (err) {
             console.log(err);
             setMessage({ data: err.message, visible: true });
+        }
+    };
+
+    let MetamaskAccountChangeHandler = async (account) => {
+        console.log("switched to account ", account[0]);
+        setFromOptions(account[0]);
+        if (account[0]) {
+            getAllNFT(account[0]);
         }
     };
 
@@ -113,9 +121,16 @@ function App() {
                 let tokenId = await contract.methods
                     .tokenOfOwnerByIndex(address, index)
                     .call();
+
+                //tokenURI will be a json string file,
+                //{"name": "", "description": "", "image": "url"}
                 let tokenURI = await contract.methods.tokenURI(tokenId).call();
-                tokenURIarray.push(tokenURI);
+                let tokenURIJson = JSON.parse(tokenURI);
+                //use only the image URL for imageGallery
+                tokenURIarray.push(tokenURIJson.image);
             }
+
+            console.log("all your tokens", tokenURIarray);
             // console.log("token URI of ", address, " is ", tokenURIarray);
             setImageGallery(tokenURIarray);
             //remove screen loader
@@ -173,19 +188,16 @@ function App() {
 
         //when the user selects a different account in metamask
         if (window.ethereum) {
-            window.ethereum.on("accountsChanged", (account) => {
-                console.log("switched to account ", account[0]);
-                setFromOptions(account[0]);
-                if (account[0]) {
-                    getAllNFT(account[0]);
-                }
-            });
+            window.ethereum.on("accountsChanged", MetamaskAccountChangeHandler);
         }
-
         return function cleanUp() {
             //remove the event listener
             if (window.ethereum) {
-                window.ehtereum.remove("accountsChanged");
+                console.log("handler removed");
+                window.ethereum.removeListener(
+                    "accountsChanged",
+                    MetamaskAccountChangeHandler
+                );
             }
         };
     }, []);
@@ -209,6 +221,13 @@ function App() {
     //acual code starts from here
     let handleImageSubmit = async () => {
         try {
+            //metaData format to store the data to block chain
+            let metaData = {
+                name: "something",
+                description: "image of something",
+                image: "",
+            };
+            //set loading screen
             setLoader(true);
             const ipfs = await create({ repo: "ok" + Math.random() });
             //add the image blob to ipfs
@@ -222,9 +241,11 @@ function App() {
             setLoader(false);
 
             //mint NFT
+            metaData.image = `https://ipfs.io/ipfs/${cid}`;
             console.log("minting......");
+            console.log("metadata ", JSON.stringify(metaData));
             setMessage({ data: "minting...", visible: true });
-            mintNFT(fromAccount, `https://ipfs.io/ipfs/${cid}`);
+            mintNFT(fromAccount, JSON.stringify(metaData));
         } catch (err) {
             console.error("error-----", err);
         }
