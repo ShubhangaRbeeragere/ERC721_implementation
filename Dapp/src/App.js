@@ -11,7 +11,11 @@ import ShowNFT from "./components/showNFT/showNFT";
 
 function App() {
     //for storing image file entered by the user
-    const [imageData, setImageData] = useState("");
+    const [userInput, setUserInput] = useState({
+        name: "",
+        description: "",
+        file: "",
+    });
     //to store the blob of image file
     const [imageUrl, setImageUrl] = useState("");
     //to store the cid created using image file in ipfs
@@ -34,7 +38,7 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec"
+        "0xFF6049B87215476aBf744eaA3a476cBAd46fB1cA"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -57,6 +61,8 @@ function App() {
 
     let MetamaskAccountChangeHandler = async (account) => {
         console.log("switched to account ", account[0]);
+        setUserInput({ file: "", name: "", description: "" });
+        setImageUrl(defaultImage);
         setFromOptions(account[0]);
         if (account[0]) {
             getAllNFT(account[0]);
@@ -187,7 +193,7 @@ function App() {
         setImageUrl(defaultImage);
 
         //when the user selects a different account in metamask
-        if (window.ethereum) {
+        if (window.ethereum !== undefined) {
             window.ethereum.on("accountsChanged", MetamaskAccountChangeHandler);
         }
         return function cleanUp() {
@@ -223,15 +229,22 @@ function App() {
         try {
             //metaData format to store the data to block chain
             let metaData = {
-                name: "something",
-                description: "image of something",
+                name: userInput.name,
+                description: userInput.description,
                 image: "",
             };
+            if (
+                userInput.description === "" ||
+                userInput.name === "" ||
+                userInput.file === ""
+            ) {
+                throw new Error("You Can't Leave Any Of The Inputs Empty");
+            }
             //set loading screen
             setLoader(true);
             const ipfs = await create({ repo: "ok" + Math.random() });
             //add the image blob to ipfs
-            const { cid } = await ipfs.add(imageData);
+            const { cid } = await ipfs.add(userInput.file);
             const pinData = await ipfs.pin.add(cid);
             //pin the cid
             if (pinData === cid) console.log("pinning successfull");
@@ -247,14 +260,22 @@ function App() {
             setMessage({ data: "minting...", visible: true });
             mintNFT(fromAccount, JSON.stringify(metaData));
         } catch (err) {
-            console.error("error-----", err);
+            setMessage({ data: err.message, visible: true });
         }
     };
     let handleImageChange = (e) => {
         //get the file uploaded by the user
-        setImageData(e.target.files[0]);
-        //to display the image as preview by creating blob
-        setImageUrl(URL.createObjectURL(e.target.files[0]));
+
+        if (e.target.name === "name" || e.target.name === "description") {
+            setUserInput({ ...userInput, [e.target.name]: e.target.value });
+        }
+
+        if (e.target.files) {
+            console.log("files updating....", e.target.files[0]);
+            setUserInput({ ...userInput, file: e.target.files[0] });
+            //to display the image as preview by creating blob
+            setImageUrl(URL.createObjectURL(e.target.files[0]));
+        }
     };
     let handleRedirect = (e) => {
         e.preventDefault();
@@ -277,7 +298,7 @@ function App() {
                         handleImageSubmit={handleImageSubmit}
                         handleImageChange={handleImageChange}
                         imageUrl={imageUrl}
-                        imageData={imageData}
+                        userInput={userInput}
                         cid={cid}
                         loader={loader}
                         handleRedirect={handleRedirect}

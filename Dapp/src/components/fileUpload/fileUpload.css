@@ -12,7 +12,7 @@
 
 .file .text__file__holder {
   margin: auto;
-  margin-bottom: 8rem;
+  margin-bottom: 3rem;
   margin-left: 5rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -53,6 +53,16 @@
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .file .text__file__holder .file__holder label {
@@ -74,8 +84,34 @@
   color: #0096c7;
 }
 
-.file .text__file__holder .file__holder input {
+.file .text__file__holder .file__holder #files {
   display: none;
+}
+
+.file .text__file__holder .file__holder textarea,
+.file .text__file__holder .file__holder input {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding-left: 5px;
+  font-size: 15px;
+  width: 10rem;
+  max-width: 10rem;
+  margin: 5px;
+  outline: none;
+}
+
+.file .text__file__holder .file__holder textarea:focus,
+.file .text__file__holder .file__holder input:focus {
+  outline: 1px solid black;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.file .text__file__holder .file__holder input {
+  height: 30px;
 }
 
 .file .text__file__holder .file__holder button {
@@ -97,6 +133,17 @@
 
 .file .text__file__holder .file__holder button:hover {
   color: #0096c7;
+}
+
+.file .text__file__holder .file__holder .text__inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-right: 20px;
 }
 
 .file .image__holder {

@@ -9,7 +9,7 @@ $light__blue: #0096c7;
 
     .text__file__holder {
         margin: auto;
-        margin-bottom: 8rem;
+        margin-bottom: 3rem;
         margin-left: 5rem;
         display: flex;
         flex-direction: column;
@@ -37,6 +37,9 @@ $light__blue: #0096c7;
 
         .file__holder {
             width: max-content;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             label {
                 font-size: 1rem;
                 display: block;
@@ -53,8 +56,30 @@ $light__blue: #0096c7;
                     color: $light__blue;
                 }
             }
-            input {
+            #files {
                 display: none;
+            }
+
+            textarea,
+            input {
+                font-family: "Courier New", Courier, monospace;
+                font-weight: bold;
+                border: none;
+                border-radius: 5px;
+                padding-left: 5px;
+                font-size: 15px;
+                width: 10rem;
+                max-width: 10rem;
+                margin: 5px;
+                outline: none;
+                &:focus {
+                    outline: 1px solid black;
+                    border: none;
+                    box-shadow: none;
+                }
+            }
+            input {
+                height: 30px;
             }
             button {
                 margin-top: 5px;
@@ -73,6 +98,11 @@ $light__blue: #0096c7;
                 &:hover {
                     color: $light__blue;
                 }
+            }
+            .text__inputs {
+                display: flex;
+                flex-direction: column;
+                margin-right: 20px;
             }
         }
     }
