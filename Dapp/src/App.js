@@ -5,6 +5,7 @@ import ABI from "./ABI.json";
 import Navigation from "./components/navigation/navigation";
 import FileUpload from "./components/fileUpload/fileUpload";
 import defaultImage from "./defaultImage.png";
+import Message from "./components/messages/message";
 // import Transfer from "./components/transferNFT/transfer";
 import ShowNFT from "./components/showNFT/showNFT";
 
@@ -23,11 +24,17 @@ function App() {
     let [imageGallery, setImageGallery] = useState([]);
     //for image gallery loading screen
     const [imageLoader, setImageLoader] = useState(false);
+
+    //to handle messages
+    const [message, setMessage] = useState({
+        data: "message will be shown here",
+        visible: false,
+    });
     //initialize web3
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0x526f6a6c404eEF8BEeBdA39dD1e2D87335538518"
+        "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -39,9 +46,12 @@ function App() {
                     method: "eth_requestAccounts",
                 });
                 return accounts;
+            } else {
+                throw new Error("You need to install Metamask");
             }
         } catch (err) {
             console.log(err);
+            setMessage({ data: err.message, visible: true });
         }
     };
 
@@ -70,10 +80,11 @@ function App() {
             .mintNFT(address, tokenURI)
             .send({
                 from: address,
-                gas: 80000000,
+                gas: 800000,
             })
             .on("receipt", (data) => {
                 console.log("--nft mint successfull--");
+                setMessage({ data: "nft mint successfull", visible: true });
                 // balanceOf(address);
                 getAllNFT(address);
                 // balanceOf(address);
@@ -85,6 +96,7 @@ function App() {
             .on("error", (err, receipt) => {
                 if (err) {
                     console.error("--error--mintNFT--", err);
+                    setMessage({ data: err.message, visible: true });
                 }
             });
     };
@@ -95,6 +107,7 @@ function App() {
             setImageLoader(true);
             let balance = await balanceOf(address);
             console.log("getting nfts");
+            setMessage({ data: "fetching NFTs.....", visible: true });
             let tokenURIarray = [];
             for (let index = 0; index < balance; index++) {
                 let tokenId = await contract.methods
@@ -107,8 +120,10 @@ function App() {
             setImageGallery(tokenURIarray);
             //remove screen loader
             setImageLoader(false);
+            setMessage({ ...message, visible: false });
         } catch (err) {
             console.log("--error--getAllNFT--", err);
+            setMessage({ data: err.message, visible: true });
         }
     };
 
@@ -120,6 +135,7 @@ function App() {
             return parseInt(balance);
         } catch (err) {
             console.error("--error--balanceOf--", err);
+            setMessage({ data: err.message, visible: true });
         }
     };
 
@@ -156,17 +172,21 @@ function App() {
         setImageUrl(defaultImage);
 
         //when the user selects a different account in metamask
-        window.ethereum.on("accountsChanged", (account) => {
-            console.log("switched to account ", account[0]);
-            setFromOptions(account[0]);
-            if (account[0]) {
-                getAllNFT(account[0]);
-            }
-        });
+        if (window.ethereum) {
+            window.ethereum.on("accountsChanged", (account) => {
+                console.log("switched to account ", account[0]);
+                setFromOptions(account[0]);
+                if (account[0]) {
+                    getAllNFT(account[0]);
+                }
+            });
+        }
 
         return function cleanUp() {
             //remove the event listener
-            window.ehtereum.remove("accountsChanged");
+            if (window.ethereum) {
+                window.ehtereum.remove("accountsChanged");
+            }
         };
     }, []);
 
@@ -203,6 +223,7 @@ function App() {
 
             //mint NFT
             console.log("minting......");
+            setMessage({ data: "minting...", visible: true });
             mintNFT(fromAccount, `https://ipfs.io/ipfs/${cid}`);
         } catch (err) {
             console.error("error-----", err);
@@ -250,6 +271,8 @@ function App() {
             {/* <div className="second__page">
                 <Transfer />
             </div>{" "} */}
+
+            <Message message={message} setMessage={setMessage} />
         </div>
     );
 }

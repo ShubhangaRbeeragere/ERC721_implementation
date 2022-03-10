@@ -10,7 +10,7 @@
                     "name": "Ganache",
                     "commands": [
                         "cd smart_contract",
-                        "ganache-cli -p 7545 -l 20000000000000  -g 20000000000000 -e 2000000"
+                        "ganache-cli -p 7545 -l 20000000000000  -g 200000000 -e 20000 -d"
                     ]
                 },
                 {

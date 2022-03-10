@@ -1,0 +1,57 @@
+$dark__blue: #03045e;
+$light__blue: #0096c7;
+
+.message {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    transform: translateX(-20%);
+
+    width: 50%;
+    height: 4rem;
+    background-color: black;
+    border-radius: 10px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+
+    animation: anime 300ms ease forwards 1;
+    .text {
+        width: 80%;
+
+        h4 {
+            color: $light__blue;
+            margin-bottom: 10px;
+        }
+        p {
+            color: white;
+            font-size: 15px;
+        }
+    }
+    span {
+        height: 30px;
+        width: 30px;
+        background-color: rgb(178, 207, 212);
+        margin-left: auto;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        &:hover {
+            background-color: white;
+        }
+        img {
+            height: 20px;
+            width: 20px;
+        }
+    }
+}
+
+@keyframes anime {
+    from {
+        left: -30%;
+    }
+    to {
+        left: 15%;
+    }
+}
