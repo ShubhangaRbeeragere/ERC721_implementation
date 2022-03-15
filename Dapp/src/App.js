@@ -30,6 +30,9 @@ function App() {
     //for image gallery loading screen
     const [imageLoader, setImageLoader] = useState(false);
 
+    //for facebook posts image gallery
+    let [facebookPosts, setFacebookPosts] = useState([]);
+
     //to handle messages
     const [message, setMessage] = useState({
         data: "message will be shown here",
@@ -61,7 +64,7 @@ function App() {
     };
 
     let MetamaskAccountChangeHandler = async (account) => {
-        console.log("switched to account ", account[0]);
+        // console.log("switched to account ", account[0]);
         setUserInput({ file: "", name: "", description: "" });
         setImageUrl(defaultImage);
         setFromOptions(account[0]);
@@ -69,7 +72,45 @@ function App() {
             getAllNFT(account[0]);
         }
     };
+    //for facebook /////////////////////////////////////////////////////////////////////////
+    let facebookLogin = () => {
+        window.FB.getLoginStatus(function (response) {
+            console.log(response);
+            if (response.status === "connected") {
+                console.log("already connected");
+                getPosts();
+            } else {
+                window.FB.login((response) => {
+                    if (response.status === "connected") {
+                        console.log("you are logged in");
+                    } else {
+                        console.error("login failed");
+                    }
+                });
+            }
+        });
+    };
 
+    let getPosts = () => {
+        console.log("getting data....");
+        window.FB.api(
+            "/me/posts",
+            "GET",
+            { fields: "full_picture", limit: 20 },
+            function (response) {
+                let posts = [];
+
+                for (let url of response.data) {
+                    if (url.full_picture) {
+                        posts.push(url.full_picture);
+                    }
+                }
+                setFacebookPosts(posts);
+            }
+        );
+    };
+
+    //web3 ///////////////////////////////////////////////////////////////////////////////////
     //get the name
     let getName = async () => {
         try {
@@ -90,7 +131,7 @@ function App() {
     };
     //mint NFT for the selected address
     let mintNFT = (address, tokenURI) => {
-        console.log("address ", address, " token ", tokenURI);
+        // console.log("address ", address, " token ", tokenURI);
         contract.methods
             .mintNFT(address, tokenURI)
             .send({
@@ -132,13 +173,13 @@ function App() {
                 //tokenURI will be a json string file,
                 //{"name": "", "description": "", "image": "url"}
                 let tokenURI = await contract.methods.tokenURI(tokenId).call();
-                console.log("token URI ", tokenURI);
+                // console.log("token URI ", tokenURI);
                 let tokenURIJson = JSON.parse(tokenURI);
                 //use only the image URL for imageGallery
                 tokenURIarray.push(tokenURIJson.image);
             }
 
-            console.log("all your tokens", tokenURIarray);
+            // console.log("all your tokens", tokenURIarray);
             // console.log("token URI of ", address, " is ", tokenURIarray);
             setImageGallery(tokenURIarray);
             //remove screen loader
@@ -165,7 +206,7 @@ function App() {
     let totalBalance = async (address) => {
         try {
             let balance = await contract.methods.totalSupply().call();
-            console.log(balance);
+            // console.log(balance);
         } catch (error) {
             console.log("--error--totalBalance--", error);
         }
@@ -187,8 +228,32 @@ function App() {
 
     //useEffect/////////////////////////////////////////////////////////////////
     useEffect(() => {
+        //initialize facebook
+        window.fbAsyncInit = function () {
+            window.FB.init({
+                appId: "245284471060624",
+                cookie: true,
+                xfbml: true,
+                version: "v13.0",
+            });
+
+            window.FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js,
+                fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        })(document, "script", "facebook-jssdk");
+
+        //metamask
         initializeMetamask().then((acc) => {
-            console.log("accounts ", acc);
             setFromOptions(acc[0]);
         });
         //set default image
@@ -201,7 +266,6 @@ function App() {
         return function cleanUp() {
             //remove the event listener
             if (window.ethereum) {
-                console.log("handler removed");
                 window.ethereum.removeListener(
                     "accountsChanged",
                     MetamaskAccountChangeHandler
@@ -258,7 +322,7 @@ function App() {
             //mint NFT
             metaData.image = `https://ipfs.io/ipfs/${cid}`;
             console.log("minting......");
-            console.log("metadata ", JSON.stringify(metaData));
+            // console.log("metadata ", JSON.stringify(metaData));
             setMessage({ data: "minting...", visible: true });
             mintNFT(fromAccount, JSON.stringify(metaData));
         } catch (err) {
@@ -273,7 +337,7 @@ function App() {
         }
 
         if (e.target.files) {
-            console.log("files updating....", e.target.files[0]);
+            // console.log("files updating....", e.target.files[0]);
             setUserInput({ ...userInput, file: e.target.files[0] });
             //to display the image as preview by creating blob
             setImageUrl(URL.createObjectURL(e.target.files[0]));
@@ -313,7 +377,10 @@ function App() {
                 </div>
             </div>
             <div className="second__page">
-                <Facebook />
+                <Facebook
+                    facebookLogin={facebookLogin}
+                    facebookPosts={facebookPosts}
+                />
             </div>
             <Message message={message} setMessage={setMessage} />
         </div>

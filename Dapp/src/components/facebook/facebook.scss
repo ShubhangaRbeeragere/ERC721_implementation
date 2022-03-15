@@ -6,19 +6,28 @@ $light__blue: #0096c7;
     background-color: black;
     height: 100%;
     width: 100%;
+    padding-left: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 
     .instructions {
-        max-width: 12rem;
+        margin-left: 20px;
+        max-width: 15rem;
         color: white;
         position: relative;
+        line-height: 30px;
+        font-size: larger;
+        font-weight: 100;
 
         &::after {
             position: absolute;
             content: "";
-            height: 100%;
+            height: 110%;
             width: 5px;
-            left: 0;
-            top: 0;
+            left: -25px;
+            top: -5%;
             background-color: $light__blue;
         }
     }
@@ -26,14 +35,83 @@ $light__blue: #0096c7;
     .login__button {
         background-color: $light__blue;
         width: max-content;
+        margin-top: 2rem;
         padding: 13px 10px;
         font-size: larger;
         font-weight: bold;
+        cursor: pointer;
+        &:hover {
+            background-color: lighten($light__blue, 10%);
+        }
     }
 }
 
 .right {
+    display: flex;
+    flex-direction: column;
     background-color: black;
     width: 100%;
     height: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 5rem;
+    .image__gallery {
+        .heading {
+            color: white;
+            text-align: center;
+        }
+        .images {
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5px;
+            height: 20rem;
+            width: 20rem;
+            background-color: rgba($light__blue, 0.6);
+            border-radius: 5px;
+            overflow: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            align-content: flex-start;
+            column-gap: 0;
+            .span {
+                display: inline-block;
+                height: 5rem;
+                width: 5rem;
+                position: relative;
+                margin-top: 20px;
+                justify-self: center;
+                z-index: 1;
+                img {
+                    height: 5rem;
+                    width: 5rem;
+                    object-fit: cover;
+                    border-radius: 5px;
+                    box-shadow: 0 5px 5px 1px rgba(black, 0.5);
+                }
+            }
+
+            h3 {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                text-align: center;
+                line-height: 20rem;
+            }
+        }
+    }
+
+    .create__nft__button {
+        margin-top: 20px;
+        background-color: $dark__blue;
+        padding: 10px;
+        font-size: larger;
+        color: white;
+        width: max-content;
+        cursor: pointer;
+        &:hover {
+            background-color: lighten($dark__blue, 10%);
+        }
+    }
 }

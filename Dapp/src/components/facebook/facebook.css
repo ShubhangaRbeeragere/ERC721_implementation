@@ -3,21 +3,39 @@
   background-color: black;
   height: 100%;
   width: 100%;
+  padding-left: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .left .instructions {
-  max-width: 12rem;
+  margin-left: 20px;
+  max-width: 15rem;
   color: white;
   position: relative;
+  line-height: 30px;
+  font-size: larger;
+  font-weight: 100;
 }
 
 .left .instructions::after {
   position: absolute;
   content: "";
-  height: 100%;
+  height: 110%;
   width: 5px;
-  left: 0;
-  top: 0;
+  left: -25px;
+  top: -5%;
   background-color: #0096c7;
 }
 
@@ -26,13 +44,105 @@
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+  margin-top: 2rem;
   padding: 13px 10px;
   font-size: larger;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.left .login__button:hover {
+  background-color: #00bcfa;
 }
 
 .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   background-color: black;
   width: 100%;
   height: 100%;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 5rem;
+}
+
+.right .image__gallery .heading {
+  color: white;
+  text-align: center;
+}
+
+.right .image__gallery .images {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  height: 20rem;
+  width: 20rem;
+  background-color: rgba(0, 150, 199, 0.6);
+  border-radius: 5px;
+  overflow: auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-column-gap: 0;
+          column-gap: 0;
+}
+
+.right .image__gallery .images .span {
+  display: inline-block;
+  height: 5rem;
+  width: 5rem;
+  position: relative;
+  margin-top: 20px;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  z-index: 1;
+}
+
+.right .image__gallery .images .span img {
+  height: 5rem;
+  width: 5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.5);
+}
+
+.right .image__gallery .images h3 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 20rem;
+}
+
+.right .create__nft__button {
+  margin-top: 20px;
+  background-color: #03045e;
+  padding: 10px;
+  font-size: larger;
+  color: white;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  cursor: pointer;
+}
+
+.right .create__nft__button:hover {
+  background-color: #05068f;
 }

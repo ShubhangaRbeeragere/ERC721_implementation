@@ -1,7 +1,7 @@
 import React from "react";
 import "./facebook.css";
 
-function Facebook() {
+function Facebook({ facebookLogin, facebookPosts }) {
     return (
         <>
             <div className="left">
@@ -10,47 +10,49 @@ function Facebook() {
                     and retrive all your posts. <br />
                     <br /> choose the images from the posts to convert to NFT
                 </p>
-                <div className="login__button">Login To Facebook</div>
+                <div
+                    className="login__button"
+                    onClick={() => {
+                        facebookLogin();
+                    }}
+                >
+                    Login To Facebook
+                </div>
             </div>
             <div className="right">
                 <div className="image__gallery">
                     <h4 className="heading">Select The Images</h4>
-                    <div className="images"></div>
+                    <Images facebookPosts={facebookPosts} />
                 </div>
-                <div className="create__nft__button"></div>
+                <div className="create__nft__button">Create NFT</div>
             </div>
         </>
     );
 }
 
-function Images({ imageGallery, imageLoader }) {
+function Images({ facebookPosts, imageSelector }) {
     return (
-        <div
-            className={
-                imageLoader
-                    ? "image__gallery image__gallery__loading"
-                    : "image__gallery"
-            }
-        >
-            {imageGallery.length > 0 ? (
-                imageGallery.map((tokenURI, index) => {
+        <div className="images">
+            {facebookPosts.length > 0 ? (
+                facebookPosts.map((imageURL, index) => {
                     return (
                         <div
                             className="span"
                             key={index}
-                            onClick={() => {
-                                const win = window.open(tokenURI, "_blank");
+                            onClick={() => {}}
+                            onDoubleClick={() => {
+                                const win = window.open(imageURL, "_blank");
                                 if (!win) {
                                     win.focus();
                                 }
                             }}
                         >
-                            <img src={tokenURI} alt="" />
+                            <img src={imageURL} alt="" />
                         </div>
                     );
                 })
             ) : (
-                <h3>You Don't Have Any NFT</h3>
+                <h3>Login To Get Your Posts</h3>
             )}
         </div>
     );
