@@ -1,0 +1,38 @@
+.left {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+}
+
+.left .instructions {
+  max-width: 12rem;
+  color: white;
+  position: relative;
+}
+
+.left .instructions::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 5px;
+  left: 0;
+  top: 0;
+  background-color: #0096c7;
+}
+
+.left .login__button {
+  background-color: #0096c7;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 13px 10px;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.right {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}

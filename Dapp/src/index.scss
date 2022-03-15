@@ -16,7 +16,7 @@ body {
     height: max-content;
     .App {
         //set this to 200vh if second page is needed
-        height: 100vh;
+        height: 200vh;
         .first__page {
             background-image: linear-gradient(
                 to bottom right,
@@ -32,6 +32,13 @@ body {
                 height: 100%;
                 align-items: center;
             }
+        }
+
+        .second__page {
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            flex-direction: row;
         }
     }
 }

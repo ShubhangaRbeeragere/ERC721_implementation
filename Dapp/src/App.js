@@ -6,6 +6,7 @@ import Navigation from "./components/navigation/navigation";
 import FileUpload from "./components/fileUpload/fileUpload";
 import defaultImage from "./defaultImage.png";
 import Message from "./components/messages/message";
+import Facebook from "./components/facebook/facebook";
 // import Transfer from "./components/transferNFT/transfer";
 import ShowNFT from "./components/showNFT/showNFT";
 
@@ -38,7 +39,7 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab"
+        "0x5b1869D9A4C187F2EAa108f3062412ecf0526b24"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -311,10 +312,9 @@ function App() {
                     />
                 </div>
             </div>
-            {/* <div className="second__page">
-                <Transfer />
-            </div>{" "} */}
-
+            <div className="second__page">
+                <Facebook />
+            </div>
             <Message message={message} setMessage={setMessage} />
         </div>
     );
