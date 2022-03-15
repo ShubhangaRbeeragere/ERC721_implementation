@@ -3,6 +3,13 @@
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
     },
+    "liveSassCompile.settings.generateMap": false,
+    "liveServer.settings.https": {
+        "enable": true, //set it true to enable the feature.
+        "cert": "C:\\Users\\shubhanga.rb\\Openssl\\bin\\localhost.crt", //full path of the certificate
+        "key": "C:\\Users\\shubhanga.rb\\Openssl\\bin\\localhost.key", //full path of the private key
+        "passphrase": "localhost"
+    },
     "restoreTerminals.terminals": [
         {
             "splitTerminals": [

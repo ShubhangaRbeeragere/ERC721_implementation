@@ -100,11 +100,12 @@
   max-width: 10rem;
   margin: 5px;
   outline: none;
+  background-color: white;
 }
 
 .file .text__file__holder .file__holder textarea:focus,
 .file .text__file__holder .file__holder input:focus {
-  outline: 1px solid black;
+  outline: 1px solid #0096c7;
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -148,7 +149,7 @@
 
 .file .image__holder {
   margin: auto;
-  margin-bottom: 8rem;
+  margin-bottom: 3rem;
   margin-left: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -166,7 +167,7 @@
 
 .file .image__holder img {
   background-color: #0096c7;
-  outline: 5px solid black;
+  outline: 2px solid black;
   border-radius: 5px;
   height: 12rem;
   width: 12rem;
@@ -235,4 +236,3 @@
             transform: rotate(360deg);
   }
 }
-/*# sourceMappingURL=fileUpload.css.map */

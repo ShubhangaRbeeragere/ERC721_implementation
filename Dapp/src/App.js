@@ -38,7 +38,7 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0xFF6049B87215476aBf744eaA3a476cBAd46fB1cA"
+        "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -131,6 +131,7 @@ function App() {
                 //tokenURI will be a json string file,
                 //{"name": "", "description": "", "image": "url"}
                 let tokenURI = await contract.methods.tokenURI(tokenId).call();
+                console.log("token URI ", tokenURI);
                 let tokenURIJson = JSON.parse(tokenURI);
                 //use only the image URL for imageGallery
                 tokenURIarray.push(tokenURIJson.image);

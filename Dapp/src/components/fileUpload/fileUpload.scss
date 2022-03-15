@@ -72,8 +72,9 @@ $light__blue: #0096c7;
                 max-width: 10rem;
                 margin: 5px;
                 outline: none;
+                background-color: white;
                 &:focus {
-                    outline: 1px solid black;
+                    outline: 1px solid $light__blue;
                     border: none;
                     box-shadow: none;
                 }
@@ -109,7 +110,7 @@ $light__blue: #0096c7;
 
     .image__holder {
         margin: auto;
-        margin-bottom: 8rem;
+        margin-bottom: 3rem;
         margin-left: 1rem;
         display: flex;
         flex-direction: column;
@@ -119,7 +120,7 @@ $light__blue: #0096c7;
         transition: all 1s;
         img {
             background-color: $light__blue;
-            outline: 5px solid black;
+            outline: 2px solid black;
             border-radius: 5px;
             height: 12rem;
             width: 12rem;
