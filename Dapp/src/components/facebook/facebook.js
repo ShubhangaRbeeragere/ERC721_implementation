@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./facebook.css";
+import TickBox from "./tickBox.png";
 
-function Facebook({ facebookLogin, facebookPosts }) {
+function Facebook({
+    facebookLogin,
+    facebookPosts,
+    selectedPosts,
+    setSelectedPosts,
+}) {
     return (
         <>
             <div className="left">
@@ -22,7 +28,11 @@ function Facebook({ facebookLogin, facebookPosts }) {
             <div className="right">
                 <div className="image__gallery">
                     <h4 className="heading">Select The Images</h4>
-                    <Images facebookPosts={facebookPosts} />
+                    <Images
+                        facebookPosts={facebookPosts}
+                        setSelectedPosts={setSelectedPosts}
+                        selectedPosts={selectedPosts}
+                    />
                 </div>
                 <div className="create__nft__button">Create NFT</div>
             </div>
@@ -30,7 +40,7 @@ function Facebook({ facebookLogin, facebookPosts }) {
     );
 }
 
-function Images({ facebookPosts, imageSelector }) {
+function Images({ facebookPosts, selectedPosts, setSelectedPosts }) {
     return (
         <div className="images">
             {facebookPosts.length > 0 ? (
@@ -39,7 +49,10 @@ function Images({ facebookPosts, imageSelector }) {
                         <div
                             className="span"
                             key={index}
-                            onClick={() => {}}
+                            onClick={() => {
+                                console.log(selectedPosts);
+                                setSelectedPosts((prev) => [...prev, imageURL]);
+                            }}
                             onDoubleClick={() => {
                                 const win = window.open(imageURL, "_blank");
                                 if (!win) {
@@ -47,6 +60,18 @@ function Images({ facebookPosts, imageSelector }) {
                                 }
                             }}
                         >
+                            {selectedPosts.includes(imageURL) ? (
+                                <span className="tickBox__wrapper">
+                                    {console.log("exists")}
+                                    <img
+                                        src={TickBox}
+                                        alt="tick"
+                                        className="click__tick"
+                                    ></img>
+                                </span>
+                            ) : (
+                                ""
+                            )}
                             <img src={imageURL} alt="" />
                         </div>
                     );

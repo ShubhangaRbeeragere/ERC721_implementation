@@ -44,7 +44,7 @@
             "splitTerminals": [
                 {
                     "name": "React",
-                    "commands": ["cd Dapp", "npm run start"]
+                    "commands": ["cd Dapp", "set HTTPS=true&&npm run start"]
                 }
             ]
         }

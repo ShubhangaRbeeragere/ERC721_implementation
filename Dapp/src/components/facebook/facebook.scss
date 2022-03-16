@@ -75,6 +75,7 @@ $light__blue: #0096c7;
             grid-template-rows: auto;
             align-content: flex-start;
             column-gap: 0;
+
             .span {
                 display: inline-block;
                 height: 5rem;
@@ -89,6 +90,25 @@ $light__blue: #0096c7;
                     object-fit: cover;
                     border-radius: 5px;
                     box-shadow: 0 5px 5px 1px rgba(black, 0.5);
+                }
+
+                .tickBox__wrapper {
+                    position: absolute;
+                    content: "";
+                    background-color: rgba(black, 0.6);
+                    height: 100%;
+                    width: 100%;
+                    left: 0;
+                    top: 0;
+                    .click__tick {
+                        height: 30px;
+                        width: 30px;
+                        position: absolute;
+                        z-index: 3;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
                 }
             }
 

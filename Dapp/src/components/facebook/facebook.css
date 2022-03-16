@@ -123,6 +123,27 @@
           box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
+.right .image__gallery .images .span .tickBox__wrapper {
+  position: absolute;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.right .image__gallery .images .span .tickBox__wrapper .click__tick {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
 .right .image__gallery .images h3 {
   position: absolute;
   height: 100%;

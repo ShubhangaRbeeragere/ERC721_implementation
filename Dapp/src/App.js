@@ -31,7 +31,9 @@ function App() {
     const [imageLoader, setImageLoader] = useState(false);
 
     //for facebook posts image gallery
-    let [facebookPosts, setFacebookPosts] = useState([]);
+    let [facebookPosts, setFacebookPosts] = useState();
+    //for getting the selected images in facebook image gallery
+    let [selectedPosts, setSelectedPosts] = useState([]);
 
     //to handle messages
     const [message, setMessage] = useState({
@@ -42,7 +44,7 @@ function App() {
     let web3 = new Web3("HTTP://127.0.0.1:7545");
     let contract = new web3.eth.Contract(
         ABI,
-        "0x5b1869D9A4C187F2EAa108f3062412ecf0526b24"
+        "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab"
     );
     ///////////////////////////////////////////////////////////////////////
     //checking if metamask installed
@@ -99,7 +101,7 @@ function App() {
             { fields: "full_picture", limit: 20 },
             function (response) {
                 let posts = [];
-
+                console.log(response);
                 for (let url of response.data) {
                     if (url.full_picture) {
                         posts.push(url.full_picture);
@@ -380,6 +382,8 @@ function App() {
                 <Facebook
                     facebookLogin={facebookLogin}
                     facebookPosts={facebookPosts}
+                    selectedPosts={selectedPosts}
+                    setSelectedPosts={setSelectedPosts}
                 />
             </div>
             <Message message={message} setMessage={setMessage} />
