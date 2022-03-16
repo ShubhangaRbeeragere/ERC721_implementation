@@ -61,6 +61,7 @@ $light__blue: #0096c7;
             text-align: center;
         }
         .images {
+            user-select: none;
             position: relative;
             margin-left: auto;
             margin-right: auto;
@@ -100,11 +101,12 @@ $light__blue: #0096c7;
                     width: 100%;
                     left: 0;
                     top: 0;
+                    z-index: 5;
                     .click__tick {
                         height: 30px;
                         width: 30px;
                         position: absolute;
-                        z-index: 3;
+                        z-index: 5;
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);

@@ -1,4 +1,4 @@
-import { create } from "ipfs-core";
+import { create, urlSource } from "ipfs-core";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import ABI from "./ABI.json";
@@ -31,7 +31,7 @@ function App() {
     const [imageLoader, setImageLoader] = useState(false);
 
     //for facebook posts image gallery
-    let [facebookPosts, setFacebookPosts] = useState();
+    let [facebookPosts, setFacebookPosts] = useState([]);
     //for getting the selected images in facebook image gallery
     let [selectedPosts, setSelectedPosts] = useState([]);
 
@@ -112,6 +112,41 @@ function App() {
         );
     };
 
+    let convertToNFT = async () => {
+        try {
+            //create ana ipfs link
+            const ipfs = await create({ repo: "ok" + Math.random() });
+            //metaData format to store the data to block chain
+            let metaData = {
+                name: "",
+                description: "",
+                image: "",
+            };
+            for (let faceBookPost of selectedPosts) {
+                //add the image blob to ipfs
+                let response = await fetch(faceBookPost);
+                let blob = await response.blob();
+                let url = URL.createObjectURL(blob);
+                console.log(url);
+
+                const { cid } = await ipfs.add(urlSource(url));
+                const pinData = await ipfs.pin.add(cid);
+                //pin the cid
+                if (pinData === cid)
+                    console.log("pinning successfull", pinData);
+                else console.error("pinning error");
+
+                // //mint NFT
+                metaData.image = `https://ipfs.io/ipfs/${cid}`;
+                console.log("minting......");
+                // console.log("metadata ", JSON.stringify(metaData));
+                setMessage({ data: "minting...", visible: true });
+                mintNFT(fromAccount, JSON.stringify(metaData));
+            }
+        } catch (err) {
+            setMessage({ data: err.message, visible: true });
+        }
+    };
     //web3 ///////////////////////////////////////////////////////////////////////////////////
     //get the name
     let getName = async () => {
@@ -315,7 +350,7 @@ function App() {
             const { cid } = await ipfs.add(userInput.file);
             const pinData = await ipfs.pin.add(cid);
             //pin the cid
-            if (pinData === cid) console.log("pinning successfull");
+            if (pinData === cid) console.log("pinning successfull", pinData);
             else console.error("pinning error");
             //////
             setCid(cid.toString());
@@ -384,6 +419,7 @@ function App() {
                     facebookPosts={facebookPosts}
                     selectedPosts={selectedPosts}
                     setSelectedPosts={setSelectedPosts}
+                    convertToNFT={convertToNFT}
                 />
             </div>
             <Message message={message} setMessage={setMessage} />

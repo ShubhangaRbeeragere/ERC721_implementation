@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./facebook.css";
-import TickBox from "./tickBox.png";
+import TickBox from "./tickBox.svg";
 
 function Facebook({
     facebookLogin,
     facebookPosts,
     selectedPosts,
     setSelectedPosts,
+    convertToNFT,
 }) {
     return (
         <>
@@ -27,14 +28,18 @@ function Facebook({
             </div>
             <div className="right">
                 <div className="image__gallery">
-                    <h4 className="heading">Select The Images</h4>
+                    <h4 className="heading">
+                        Select The Images From Your Posts
+                    </h4>
                     <Images
                         facebookPosts={facebookPosts}
                         setSelectedPosts={setSelectedPosts}
                         selectedPosts={selectedPosts}
                     />
                 </div>
-                <div className="create__nft__button">Create NFT</div>
+                <div className="create__nft__button" onClick={convertToNFT}>
+                    Create NFT
+                </div>
             </div>
         </>
     );
@@ -50,8 +55,17 @@ function Images({ facebookPosts, selectedPosts, setSelectedPosts }) {
                             className="span"
                             key={index}
                             onClick={() => {
-                                console.log(selectedPosts);
-                                setSelectedPosts((prev) => [...prev, imageURL]);
+                                if (!selectedPosts.includes(imageURL)) {
+                                    setSelectedPosts((prev) => [
+                                        ...prev,
+                                        imageURL,
+                                    ]);
+                                } else {
+                                    let posts = selectedPosts.filter(
+                                        (value) => value !== imageURL
+                                    );
+                                    setSelectedPosts(posts);
+                                }
                             }}
                             onDoubleClick={() => {
                                 const win = window.open(imageURL, "_blank");
@@ -62,7 +76,6 @@ function Images({ facebookPosts, selectedPosts, setSelectedPosts }) {
                         >
                             {selectedPosts.includes(imageURL) ? (
                                 <span className="tickBox__wrapper">
-                                    {console.log("exists")}
                                     <img
                                         src={TickBox}
                                         alt="tick"
